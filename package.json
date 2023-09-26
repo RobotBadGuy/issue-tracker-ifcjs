@@ -1,0 +1,27 @@
+{
+  "name": "new-folder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup --config",
+    "watch": "rollup -c -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "rollup": "^3.21.7"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "camera-controls": "^2.3.5",
+    "gsap": "^3.11.5",
+    "three": "^0.151.3",
+    "three-mesh-bvh": "^0.6.0",
+    "web-ifc": "^0.0.41",
+    "web-ifc-three": "^0.0.125",
+    "web-ifc-viewer": "^1.0.218"
+  },
+  "type": "module"
+}

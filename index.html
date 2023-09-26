@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>basic threejs exercise</title>
+
+    <link
+      href="./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css"
+      rel="stylesheet"
+    />
+    <link
+      href="./node_modules/@fortawesome/fontawesome-free/css/brands.css"
+      rel="stylesheet"
+    />
+    <link
+      href="./node_modules/@fortawesome/fontawesome-free/css/solid.css"
+      rel="stylesheet"
+    />
+  </head>
+  <link rel="stylesheet" href="style.css" />
+  <body>
+    <canvas id="three-canvas"></canvas>
+
+    <div id="loader-container">
+      <div class="loader-text">
+        <p id="loader-text-content">Loading...</p>
+      </div>
+      <div class="boxes">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <div id="ifc-loader-container" class="hidden">
+      <div class="ifc-loader-text">
+        <p id="ifc-loader-text-content">Loading...</p>
+      </div>
+      <div class="boxes">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="annotation-viewer-container" class="hidden">
+      <div class="anno-base">
+        
+      </div>
+    </div> -->
+
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="nav-center">
+        <!-- links -->
+        <div>
+          <button class="toggle-nav">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="nav-links">
+            <li>
+              <a href="index.html" class="nav-link"> home </a>
+            </li>
+            <li>
+              <a href="index.html" class="nav-link"> models </a>
+            </li>
+            <li>
+              <a href="index.html" class="nav-link"> about </a>
+            </li>
+            <li>
+              <input type="file" id="file-input" />
+            </li>
+          </ul>
+        </div>
+        <!-- logo -->
+        <!-- <img src="./images/logo-white.svg" class="nav-logo" alt="logo" /> -->
+        <!-- cart icon -->
+      </div>
+    </nav>
+
+    <nav class="nav-issue-tools">
+      <div class="toggle-container">
+        <div class="toggle-issue-container">
+          <button class="toggle-issues">
+            <i
+              id="toggle-issues-btn"
+              class="fa-solid fa-circle-exclamation"
+              style="color: #ffffff"
+            ></i>
+          </button>
+          <span class="issues-item-count">0</span>
+        </div>
+      </div>
+      <div class="toggle-visibility">
+        <div class="toggle-issue-visibility">
+          <button id="toggle-issues-vis-btn" class="toggle-issues">
+            <i
+              id="toggle-issues-vis-icon"
+              class="fa-solid fa-eye"
+              style="color: #ffffff"
+            ></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="navbar-tools">
+      <div class="nav-links-tools">
+        <button class="toggle-tree">
+          <i
+            id="toggle-tree-btn"
+            class="fa-solid fa-folder-tree fa-xs"
+            style="color: #ffffff"
+          ></i>
+        </button>
+      </div>
+    </nav>
+
+    <nav class="nav-query-tools">
+      <div class="measure-tool-container">
+        <button id="toggle-measure-btn" class="toggle-measure">
+          <i
+            id="toggle-measure-icon"
+            class="fa-solid fa-ruler"
+            style="color: #ffffff"
+          ></i>
+        </button>
+      </div>
+      <div class="selection-tool-container">
+        <div class="toggle-selection-container">
+          <button id="toggle-selection-btn" class="toggle-selection">
+            <i
+              id="toggle-selection-icon"
+              class="fa-solid fa-arrow-pointer"
+              style="color: #ffffff"
+            ></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- sidebar -->
+    <div class="sidebar-overlay">
+      <aside class="sidebar">
+        <!-- close -->
+        <button class="sidebar-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <!-- links -->
+        <ul class="sidebar-links">
+          <li>
+            <a href="index.html" class="sidebar-link">
+              <i class="fas fa-home fa-fw"></i>
+              home
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="sidebar-link">
+              <i class="fas fa-couch fa-fw"></i>
+              models
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="sidebar-link">
+              <i class="fas fa-book fa-fw"></i>
+              about
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <!-- issues -->
+    <div class="issues-overlay">
+      <aside class="issues">
+        <button class="issues-close">
+          <!-- https://fontawesome.com/search?o=r&m=free&s=solid -->
+          <i id="issues-close-btn" class="fa-solid fa-circle-xmark fa-xs"></i>
+        </button>
+        <header><h3>issues</h3></header>
+        <!-- issue items -->
+        <div class="issues-items"></div>
+        <!-- footer -->
+        <footer>
+          <h3 class="issues-total">total issues: 0</h3>
+          <button class="issues-checkout btn">Review</button>
+        </footer>
+      </aside>
+    </div>
+
+    <!-- SELECTION TREE -->
+    <div class="tree-overlay">
+      <aside class="tree" id="treeAsideElement">
+        <button class="tree-close">
+          <!-- https://fontawesome.com/search?o=r&m=free&s=solid -->
+          <i id="tree-close-btn" class="fa-solid fa-circle-xmark fa-xs"></i>
+        </button>
+        <button id="tree-stretch-btn" class="tree-stretch">
+          <i class="fa-solid fa-circle-chevron-right fa-xs"></i>
+        </button>
+        <header><h3>Object Tree</h3></header>
+        <!-- issue items -->
+        <div class="tree-items"></div>
+        <!-- footer -->
+        <footer></footer>
+      </aside>
+    </div>
+
+    <!-- <script type="module" src="bundle.js"></script> -->
+    <script type="module" src="./dist/index.js"></script>
+    <script type="module" src="./dist/planets.js"></script>
+    <script type="module" src="./dist/labels.js"></script>
+    <script type="module" src="./dist/toggleIssues.js"></script>
+    <script type="module" src="./dist/toggleTree.js"></script>
+    <script type="module" src="./dist/toggleSideBar.js"></script>
+  </body>
+</html>
